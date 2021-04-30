@@ -28,7 +28,7 @@ The probability of a count of five or above is just the complement of the above.
 ```
 E_5plus <- 1 - sum(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour)
 ```
-Put this together---i.e. put probabilities in vector and multiply by 576 (the total number of bombs):
+Put this together---i.e. put the probabilities in the vector and multiply by 576 (the total number of bombs):
 ```
 expected_probs <- c(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour, E_5plus)
 expected <-  expected_probs*576 
