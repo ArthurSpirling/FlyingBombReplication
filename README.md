@@ -69,5 +69,43 @@ cat("\n p-value=",pvalue,"\n")
 ```
 This is `large' (in that it is greater than 0.05) at 0.88.  So we cannot reject the null of the Poisson.  So far so good.
 
+## Figure 2: Shaw & Shaw extension to whole London County Region
+
+In Fig 2 (and surrounding text), Shaw and Shaw extend the earlier analysis to the whole London County Region (so, not just South London). They get a slightly different lambda, but otherwise the set up is identical, statistically:
+```
+lambda2 <- 532/576
+E_kzero2 <- dpois(0, lambda2)
+E_kone2 <- dpois(1, lambda2)
+E_ktwo2 <- dpois(2, lambda2)
+E_kthree2 <- dpois(3,lambda2)
+E_kfour2 <- dpois(4, lambda2)
+E_5plus2 <- 1 - sum(E_kzero2, E_kone2, E_ktwo2, E_kthree2, E_kfour2)
+```
+Now, calculate the expected counts and probabilities: 
+```
+expected_probs2 <- c(E_kzero2, E_kone2, E_ktwo2, E_kthree2, E_kfour2, E_5plus2)
+expected2 <-  expected_probs2*576 
+```
+Now we need the observed counts
+```
+observed2 <- c(237, 189, 115, 28, 6, 1)
+```
+Do the test:
+```
+stat2 <- as.numeric( suppressWarnings( chisq.test(x = observed2, p = expected_probs2)$statistic ) )
+```
+Calculate the probability of this value on df=4...
+```
+pvalue2 <- 1- pchisq(stat2, df=4) #0.18
+```
+Shaw and Shaw report 0.70 in their paper, but acknowledge the 0.18 is in fact correct.  In any case, we cannot reject the null of a Poisson. For completeness, let's print print our version of Table 2:
+```
+tab2 <- data.frame("k"=0:5,"Expected"= round(expected2,d=2), "Observed"=observed2)
+
+cat("\nReplicated Shaw and Shaw, Table 2:\n\n")
+print(tab2, row.names = FALSE)
+cat("\n-----------------------")
+```
+
 
 
