@@ -1,2 +1,5 @@
-# FlyingBombReplication
-R Code for Shaw &amp; Shaw's "The Flying Bomb and the Actuary" (2019)
+Replication Materials for "The Flying Bomb and the Actuary"
+
+In the 2019 edition of *Signifance*, Luke Shaw and Liam Shaw have an interesting article on so-called flying bombs from the Second World War.  Specifically, Shaw and Shaw study the bombing of London, by German (V1)[https://en.wikipedia.org/wiki/V-1_flying_bomb] 'doodlebugs' and (V2)[https://en.wikipedia.org/wiki/V-2_rocket] rockets.  These were especially common in South London, and many fell in my hometown of (Carshalton)[https://www.bbc.co.uk/history/ww2peopleswar/stories/15/a2099315.shtml].
+
+The authors revisit earlier work by RD Clarke, an actuary and statistician.  His interest was in whether the bombs were targeted, or fell 'randomly'. In his original article ("An application of the Poisson distribution", 1946) he used the Poisson distribution as a null hypothesis. His method was to uniformly divide a map of (south) London into equal unit squares of land, and then count the number of V1 bombs that landed in each.  If these counts are Poisson distributed, this is *prima facie* evidence that the bombs were *not* targeted at specific squares.  That is, 
