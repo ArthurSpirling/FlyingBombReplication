@@ -1,5 +1,5 @@
 # Replication Materials for "The Flying Bomb and the Actuary"
-<img src="sign.jpg" alt="Significance" height="150"/><img src="v1_fig.jpg" alt="doodlebug" height="150"/>
+<img src="sign.jpg" alt="Significance" height="150"/><img src="v1_fig.jpg" alt="doodlebug" height="150"/><img src="slondon.jpg" alt="south london" height="150"/>
 
 In a 2019 edition of [*Signifance*](https://www.significancemagazine.com/), Luke Shaw and Liam Shaw have an interesting article on so-called "flying bombs" from the Second World War. Specifically, Shaw and Shaw study the bombing of London, by German [V1 'doodlebugs'](https://en.wikipedia.org/wiki/V-1_flying_bomb)  and [V2 rockets](https://en.wikipedia.org/wiki/V-2_rocket).  These were especially common in South London, and many fell in my hometown of [Carshalton](https://www.bbc.co.uk/history/ww2peopleswar/stories/15/a2099315.shtml). 
 
