@@ -44,6 +44,18 @@ cat("\nReplicated Shaw and Shaw, Table 1:\n\n")
 print(tab, row.names = FALSE)
 cat("\n-----------------------")
 ```
+It should look something like this:
+| k | Expected | Observed |
+| --------------- | --------------- | --------------- |
+| 0 |  226.742723 | 229 |
+| 1 | 211.390351  | 211 |
+| 2 | 98.538731  | 93 |
+| 3 | 30.622279 | 35 |
+| 4 | 7.137224 | 7 |
+| 5 |  1.568692 | 1 | 
+
+which is, modulo rounding error, what Shaw and Shaw report.
+
 Next, we use a [chisq goodness of fit test](https://rpubs.com/pg2000in/ChiSquareGoodnessFit). We will compare our observed counts to those we would expect under the null of a the Poisson with a lambda as given above. Note that R's built in function will get the degrees of freedom wrong (from our POV), because it is expecting a contingency table.  We'll fix that later.  It may also complain that some cell counts are too low. We will ignore that. For now then, just grab the statistic...
 ```
 stat <- suppressWarnings( chisq.test(x = observed, p = expected_probs)$statistic )
