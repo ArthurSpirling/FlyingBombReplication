@@ -51,7 +51,6 @@ stat <- suppressWarnings( chisq.test(x = observed, p = expected_probs)$statistic
 And then ask for the probability of this value on df=4 (because we do number of rows-1 multiplied by number of columns -1 and then minus 1 at the end, because we have estimated a parameter in lambda).
 ```
 pvalue <- 1- pchisq(stat, df=4) 
-```
 cat("\nNull hypothesis: observed counts follow a Poisson (lam=537/576).")
 cat("\nProbability of observing these counts if null is true is...")
 cat("\n p-value=",pvalue,"\n")
