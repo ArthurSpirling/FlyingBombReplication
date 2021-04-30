@@ -159,7 +159,7 @@ The observed counts are
 ```
 observed4 <- c(356, 41, 10, 1, 0, 0)
 ```
-The text is
+The test is
 ```
 stat4 <- as.numeric( suppressWarnings( chisq.test(x = observed4, p = expected_probs4)$statistic ) )
 pvalue4 <- 1- pchisq(stat4, df=4) # 0.0077
