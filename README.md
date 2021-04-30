@@ -69,9 +69,9 @@ cat("\n p-value=",pvalue,"\n")
 ```
 This is `large' (in that it is greater than 0.05) at 0.88.  So we cannot reject the null of the Poisson.  So far so good.
 
-## Figure 2: Shaw & Shaw extension to whole London County Region
+## Figure 2: Repeating Clarke for South London Sample
+Shaw and Shaw try an exact replication of Clarke, by looking at South London and running his analysis again.  It differs slightly, because Clarke doesn't report the exact map, so Shaw and Shaw have to best-guess what aggregate area he was using.  Their lambda estimate is very similar, and everything else follows as expected (though see comment on their p-value below):
 
-In Fig 2 (and surrounding text), Shaw and Shaw extend the earlier analysis to the whole London County Region (so, not just South London). They get a slightly different lambda, but otherwise the set up is identical, statistically:
 ```
 lambda2 <- 532/576
 E_kzero2 <- dpois(0, lambda2)
@@ -98,7 +98,7 @@ Calculate the probability of this value on df=4...
 ```
 pvalue2 <- 1- pchisq(stat2, df=4) #0.18
 ```
-Shaw and Shaw report 0.70 in their paper, but acknowledge the 0.18 is in fact correct.  In any case, we cannot reject the null of a Poisson. For completeness, let's print print our version of Table 2:
+Shaw and Shaw report 0.70 in their paper, but acknowledge the 0.18 is in fact correct.  In any case, we cannot reject the null of a Poisson. For completeness, let's  print our version of Table 2:
 ```
 tab2 <- data.frame("k"=0:5,"Expected"= round(expected2,d=2), "Observed"=observed2)
 
@@ -106,6 +106,71 @@ cat("\nReplicated Shaw and Shaw, Table 2:\n\n")
 print(tab2, row.names = FALSE)
 cat("\n-----------------------")
 ```
+## Figure 3: Shaw & Shaw extension to whole London County Region
+In Fig 3 (and surrounding text), Shaw and Shaw extend the earlier analysis to the whole London County Region (so, not just South London). Now they get a somewhat different lambda, and considerably lower p-value (though see my comments below)
 
+```
+lambda3 <- 0.757
+E_kzero3 <- dpois(0, lambda3)
+E_kone3 <- dpois(1, lambda3)
+E_ktwo3 <- dpois(2, lambda3)
+E_kthree3 <- dpois(3,lambda3)
+E_kfour3 <- dpois(4, lambda3)
+E_5plus3 <- 1 - sum(E_kzero3, E_kone3, E_ktwo3, E_kthree3, E_kfour3)
+
+expected_probs3 <- c(E_kzero3, E_kone3, E_ktwo3, E_kthree3, E_kfour3, E_5plus3)
+expected3 <-  expected_probs3*1000
+```
+Now we need the observed counts
+```
+observed3 <- c(508, 306, 121, 51, 14, 0)
+```
+Do the test:
+```
+stat3 <- as.numeric( suppressWarnings( chisq.test(x = observed3, p = expected_probs3)$statistic ) )
+pvalue3 <- 1 - pchisq(stat3, df=4) # 0.0000048
+# ?? S&S report 0.02
+```
+I find the p-value to be 0.0000048.  So we can reject the null of a Poisson.  Shaw and Shaw report p=0.02, but now agree with my value.  For completeness, let's print our version of the table:
+```
+tab3 <- data.frame("k"=0:5,"Expected"= round(expected3, d=2), "Observed"=observed3)
+cat("\nReplicated Shaw and Shaw, Table 3:\n\n")
+print(tab3, row.names = FALSE)
+cat("\n-----------------------")
+```
+## Figure 4: Shaw & Shaw extension to V2 Rockets
+There are not as many V2 rockets so it is unclear if e.g. a category of "4 or more hits per square" (or "5 or more hits per square") makes sense: in those categories, the expected counts are essentially zero, so not really appropriate for a chisq test. But, let's replicate the procedure anyway.  First, the lambda is much smaller:
+```
+lambda4 <- 64/408
+```
+Using that value, we have: 
+```
+E_kzero4 <- dpois(0, lambda4)
+E_kone4 <- dpois(1, lambda4)
+E_ktwo4 <- dpois(2, lambda4)
+E_kthree4 <- dpois(3,lambda4)
+E_kfour4 <- dpois(4, lambda4)
+E_5plus4 <- 1 - sum(E_kzero4, E_kone4, E_ktwo4, E_kthree4, E_kfour4)
+
+expected_probs4 <- c(E_kzero4, E_kone4, E_ktwo4, E_kthree4, E_kfour4, E_5plus4)
+expected4 <-  expected_probs4*408
+```
+The observed counts are
+```
+observed4 <- c(356, 41, 10, 1, 0, 0)
+```
+The text is
+```
+stat4 <- as.numeric( suppressWarnings( chisq.test(x = observed4, p = expected_probs4)$statistic ) )
+pvalue4 <- 1- pchisq(stat4, df=4) # 0.0077
+# ?? S&S report 0.19
+```
+So, a p-value of 0.0077, meaning we can reject the null of a Poisson.  Shaw and Shaw report 0.19, but agree with my figure.  For completeness, let's print our version of the table in Figure 4:
+```
+tab4 <- data.frame("k"=0:5,"Expected"= round(expected4,d=2), "Observed"=observed4)
+cat("\nReplicated Shaw and Shaw, Table 4:\n\n")
+print(tab4, row.names = FALSE)
+cat("\n-----------------------")
+```
 
 
