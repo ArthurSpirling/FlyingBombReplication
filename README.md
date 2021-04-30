@@ -139,7 +139,7 @@ cat("\nReplicated Shaw and Shaw, Table 3:\n\n")
 print(tab3, row.names = FALSE)
 cat("\n-----------------------")
 ```
-Shaw and Shaw have the last entry of the table of the expected column in Figure 3 as 0.97---I believe this should be 1.11 (for the column to sum to 1000, as required).
+Shaw and Shaw have the last entry of the 'expected' column in Figure 3 as 0.97---I believe this should be 1.11 (for the column to sum to 1000, as required).
 
 ## Figure 4: Shaw & Shaw extension to V2 Rockets
 There are not as many V2 rockets so it is unclear if e.g. a category of "4 or more hits per square" (or "5 or more hits per square") makes sense: in those categories, the expected counts are essentially zero, so not really appropriate for a chisq test. But, let's replicate the procedure anyway.  First, the lambda is much smaller:
