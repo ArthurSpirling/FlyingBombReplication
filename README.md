@@ -57,7 +57,7 @@ It should look something like this:
 
 which is, modulo rounding error, what Shaw and Shaw report.
 
-Next, we use a [chisq goodness of fit test](https://rpubs.com/pg2000in/ChiSquareGoodnessFit). We will compare our observed counts to those we would expect under the null of a the Poisson with a lambda as given above. Note that R's built in function will get the degrees of freedom wrong (from our POV), because it is expecting a contingency table.  We'll fix that later.  It may also complain that some cell counts are too low. We will ignore that. For now then, just grab the statistic...
+Next, we use a [chisq goodness of fit test](https://rpubs.com/pg2000in/ChiSquareGoodnessFit). We will compare our observed counts to those we would expect under the null of a the Poisson with a lambda as given above. Note that R's built-in function will get the degrees of freedom "wrong" (from our POV), because it is expecting a contingency table.  We'll fix that later.  It may also complain that some cell counts are too low. We will ignore that. For now then, just grab the statistic...
 ```
 stat <- suppressWarnings( chisq.test(x = observed, p = expected_probs)$statistic )
 ```
