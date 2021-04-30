@@ -10,7 +10,7 @@ In April 2021, I set out to replicate what the authors had done in the paper (wh
 
 ## Figure 1: Clarke's original analysis
 
-We begin with a replicate of Table 1 from Shaw & Shaw.  In what follows, bear in mind that the null hypothesis is that we have a Poisson distribution.  The Alternative Hypothesis is that we have something else.  So, if p>0.05 (or whatever the appropriate cut-off) we cannot reject the null of a Poisson.
+We begin with a replicate of Table 1 from Shaw & Shaw.  In what follows, bear in mind that the null hypothesis is that the bombs are Poisson randomly distributed (for some particular lambda).  The Alternative Hypothesis is that they have some other (non-random) distribution.  So, if p>0.05 (or whatever the appropriate cut-off) we cannot reject the null of a Poisson.
 
 The authors give the following value for lambda from the Clarke data: 
 ```
