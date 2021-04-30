@@ -9,4 +9,54 @@ In April 2021, I set out to replicate what the authors had done in the paper (wh
 
 ## Figure 1: Clarke's original analysis
 
+We begin with a replicate of Table 1 from Shaw & Shaw.  In what follows, bear in mind that the null hypothesis is that we have a Poisson distribution.  The Alternative Hypothesis is that we have something else.  So, if p>0.05 (or whatever the appropriate cut-off) we cannot reject the null of a Poisson.
+
+The authors give the following value for lambda from the Clarke data: 
+```
+V1_lambda <- 537/576
+```
+To replicate Table 1,  we need the expected count of the squares, which are simply the Poisson probabilities evaluated for that count  using the lambda estimated above, multiplied by the total number of squares on the map (576). So...
+```
+E_kzero <- dpois(0, V1_lambda)
+E_kone <- dpois(1, V1_lambda)
+E_ktwo <- dpois(2, V1_lambda)
+E_kthree <- dpois(3, V1_lambda)
+E_kfour <- dpois(4, V1_lambda)
+```
+The probability of a count of five or above is just the complement of the above.  So,
+```
+E_5plus <- 1 - sum(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour)
+```
+Put this together---i.e. put probabilities in vector and multiply by 576 (the total number of bombs):
+```
+expected_probs <- c(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour, E_5plus)
+expected <-  expected_probs*576 
+```
+Now we need the observed counts in terms of how many squares had zero bombs, how many had 1 bomb, 2, 3, 4 and 5 or more. These are given in the original Clarke:
+```
+observed <- c(229, 211, 93, 35, 7,1)
+```
+We can print out our table
+```
+tab <- data.frame("k"=0:5,"Expected"= expected, "Observed"=observed)
+
+cat("\nReplicated Shaw and Shaw, Table 1:\n\n")
+print(tab, row.names = FALSE)
+cat("\n-----------------------")
+```
+Next, we use a [chisq goodness of fit test](https://rpubs.com/pg2000in/ChiSquareGoodnessFit). We will compare our observed counts to those we would expect under the null of a the Poisson with a lambda as given above. Note that R's built in function will get the degrees of freedom wrong (from our POV), because it is expecting a contingency table.  We'll fix that later.  It may also complain that some cell counts are too low. We will ignore that. For now then, just grab the statistic...
+```
+stat <- suppressWarnings( chisq.test(x = observed, p = expected_probs)$statistic )
+```
+And then ask for the probability of this value on df=4 (because we do number of rows-1 multiplied by number of columns -1 and then minus 1 at the end, because we have estimated a parameter in lambda).
+```
+pvalue <- 1- pchisq(stat, df=4) 
+```
+cat("\nNull hypothesis: observed counts follow a Poisson (lam=537/576).")
+cat("\nProbability of observing these counts if null is true is...")
+cat("\n p-value=",pvalue,"\n")
+```
+This is `large' (in that it is greater than 0.05) at 0.88.  So we cannot reject the null of the Poisson.  So far so good.
+
+
 
