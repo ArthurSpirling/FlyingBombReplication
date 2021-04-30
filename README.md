@@ -16,7 +16,7 @@ The authors give the following value for lambda from the Clarke data:
 ```
 V1_lambda <- 537/576
 ```
-To replicate Table 1,  we need the expected count of the squares, which are simply the Poisson probabilities evaluated for that count  using the lambda estimated above, multiplied by the total number of squares on the map (576). So...
+To replicate Table 1,  we need the expected count of squares that will have each number of bombs under the null.  That is, we need to know how many squares on the map would we expect to have zero bombs under the null, how many would we expect to have one bomb hit under the null, how many would have two and so on. We calculate these as the Poisson probabilities evaluated for that count using the lambda estimated above and then multiplied by the total number of squares on the map (576). So, to start, we need the probabilities which we can get from the `dpois` function with the lambda above:
 ```
 E_kzero <- dpois(0, V1_lambda)
 E_kone <- dpois(1, V1_lambda)
@@ -28,7 +28,7 @@ The probability of a count of five or above is just the complement of the above.
 ```
 E_5plus <- 1 - sum(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour)
 ```
-Put this together---i.e. put the probabilities in the vector and multiply by 576 (the total number of bombs):
+Put this together---i.e. put the probabilities in the vector and multiply by 576 (the total number of bombs) to give the `expected` counts of squares for each number of hits:
 ```
 expected_probs <- c(E_kzero, E_kone, E_ktwo, E_kthree, E_kfour, E_5plus)
 expected <-  expected_probs*576 
